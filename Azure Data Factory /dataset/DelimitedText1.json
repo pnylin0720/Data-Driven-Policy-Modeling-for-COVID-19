@@ -1,0 +1,228 @@
+{
+	"name": "DelimitedText1",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureBlobStorage1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"container": "sqldb"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "CountryName",
+				"type": "String"
+			},
+			{
+				"name": "CountryCode",
+				"type": "String"
+			},
+			{
+				"name": "Jurisdiction",
+				"type": "String"
+			},
+			{
+				"name": "Date",
+				"type": "String"
+			},
+			{
+				"name": "C1_School closing",
+				"type": "String"
+			},
+			{
+				"name": "C1_Flag",
+				"type": "String"
+			},
+			{
+				"name": "C2_Workplace closing",
+				"type": "String"
+			},
+			{
+				"name": "C2_Flag",
+				"type": "String"
+			},
+			{
+				"name": "C3_Cancel public events",
+				"type": "String"
+			},
+			{
+				"name": "C3_Flag",
+				"type": "String"
+			},
+			{
+				"name": "C4_Restrictions on gatherings",
+				"type": "String"
+			},
+			{
+				"name": "C4_Flag",
+				"type": "String"
+			},
+			{
+				"name": "C5_Close public transport",
+				"type": "String"
+			},
+			{
+				"name": "C5_Flag",
+				"type": "String"
+			},
+			{
+				"name": "C6_Stay at home requirements",
+				"type": "String"
+			},
+			{
+				"name": "C6_Flag",
+				"type": "String"
+			},
+			{
+				"name": "C7_Restrictions on internal movement",
+				"type": "String"
+			},
+			{
+				"name": "C7_Flag",
+				"type": "String"
+			},
+			{
+				"name": "C8_International travel controls",
+				"type": "String"
+			},
+			{
+				"name": "E1_Income support",
+				"type": "String"
+			},
+			{
+				"name": "E1_Flag",
+				"type": "String"
+			},
+			{
+				"name": "E2_Debt contract relief",
+				"type": "String"
+			},
+			{
+				"name": "E3_Fiscal measures",
+				"type": "String"
+			},
+			{
+				"name": "E4_International support",
+				"type": "String"
+			},
+			{
+				"name": "H1_Public information campaigns",
+				"type": "String"
+			},
+			{
+				"name": "H1_Flag",
+				"type": "String"
+			},
+			{
+				"name": "H2_Testing policy",
+				"type": "String"
+			},
+			{
+				"name": "H3_Contact tracing",
+				"type": "String"
+			},
+			{
+				"name": "H4_Emergency investment in healthcare",
+				"type": "String"
+			},
+			{
+				"name": "H5_Investment in vaccines",
+				"type": "String"
+			},
+			{
+				"name": "H6_Facial Coverings",
+				"type": "String"
+			},
+			{
+				"name": "H6_Flag",
+				"type": "String"
+			},
+			{
+				"name": "H7_Vaccination policy",
+				"type": "String"
+			},
+			{
+				"name": "H7_Flag",
+				"type": "String"
+			},
+			{
+				"name": "H8_Protection of elderly people",
+				"type": "String"
+			},
+			{
+				"name": "H8_Flag",
+				"type": "String"
+			},
+			{
+				"name": "M1_Wildcard",
+				"type": "String"
+			},
+			{
+				"name": "StringencyIndex",
+				"type": "String"
+			},
+			{
+				"name": "StringencyIndexForDisplay",
+				"type": "String"
+			},
+			{
+				"name": "StringencyLegacyIndex",
+				"type": "String"
+			},
+			{
+				"name": "StringencyLegacyIndexForDisplay",
+				"type": "String"
+			},
+			{
+				"name": "GovernmentResponseIndex",
+				"type": "String"
+			},
+			{
+				"name": "GovernmentResponseIndexForDisplay",
+				"type": "String"
+			},
+			{
+				"name": "ContainmentHealthIndex",
+				"type": "String"
+			},
+			{
+				"name": "ContainmentHealthIndexForDisplay",
+				"type": "String"
+			},
+			{
+				"name": "EconomicSupportIndex",
+				"type": "String"
+			},
+			{
+				"name": "EconomicSupportIndexForDisplay",
+				"type": "String"
+			},
+			{
+				"name": "id",
+				"type": "String"
+			},
+			{
+				"name": "_etag",
+				"type": "String"
+			},
+			{
+				"name": "_attachments",
+				"type": "String"
+			},
+			{
+				"name": "_ts",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

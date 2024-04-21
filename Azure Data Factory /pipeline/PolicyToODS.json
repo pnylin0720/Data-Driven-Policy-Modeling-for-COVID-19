@@ -1,0 +1,764 @@
+{
+	"name": "PolicyToODS",
+	"properties": {
+		"activities": [
+			{
+				"name": "Copy data1",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "ParquetSource",
+						"storeSettings": {
+							"type": "AzureBlobFSReadSettings",
+							"recursive": true,
+							"enablePartitionDiscovery": false
+						},
+						"formatSettings": {
+							"type": "ParquetReadSettings"
+						}
+					},
+					"sink": {
+						"type": "ParquetSink",
+						"storeSettings": {
+							"type": "AzureBlobStorageWriteSettings"
+						},
+						"formatSettings": {
+							"type": "ParquetWriteSettings"
+						}
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "CountryName",
+									"type": "String",
+									"physicalType": "UTF8"
+								},
+								"sink": {
+									"name": "CountryName",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "CountryCode",
+									"type": "String",
+									"physicalType": "UTF8"
+								},
+								"sink": {
+									"name": "CountryCode",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "Jurisdiction",
+									"type": "String",
+									"physicalType": "UTF8"
+								},
+								"sink": {
+									"name": "Jurisdiction",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "Date",
+									"type": "String",
+									"physicalType": "UTF8"
+								},
+								"sink": {
+									"name": "Date",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "C1SchoolClosing",
+									"type": "Decimal",
+									"physicalType": "DECIMAL",
+									"scale": 18,
+									"precision": 38
+								},
+								"sink": {
+									"name": "C1SchoolClosing",
+									"type": "Decimal",
+									"physicalType": "DECIMAL"
+								}
+							},
+							{
+								"source": {
+									"name": "C1Flag",
+									"type": "Decimal",
+									"physicalType": "DECIMAL",
+									"scale": 18,
+									"precision": 38
+								},
+								"sink": {
+									"name": "C1Flag",
+									"type": "Decimal",
+									"physicalType": "DECIMAL"
+								}
+							},
+							{
+								"source": {
+									"name": "C2WorkplaceClosing",
+									"type": "Decimal",
+									"physicalType": "DECIMAL",
+									"scale": 18,
+									"precision": 38
+								},
+								"sink": {
+									"name": "C2WorkplaceClosing",
+									"type": "Decimal",
+									"physicalType": "DECIMAL"
+								}
+							},
+							{
+								"source": {
+									"name": "C2Flag",
+									"type": "Decimal",
+									"physicalType": "DECIMAL",
+									"scale": 18,
+									"precision": 38
+								},
+								"sink": {
+									"name": "C2Flag",
+									"type": "Decimal",
+									"physicalType": "DECIMAL"
+								}
+							},
+							{
+								"source": {
+									"name": "C3CancelPublicEvents",
+									"type": "Decimal",
+									"physicalType": "DECIMAL",
+									"scale": 18,
+									"precision": 38
+								},
+								"sink": {
+									"name": "C3CancelPublicEvents",
+									"type": "Decimal",
+									"physicalType": "DECIMAL"
+								}
+							},
+							{
+								"source": {
+									"name": "C3Flag",
+									"type": "Decimal",
+									"physicalType": "DECIMAL",
+									"scale": 18,
+									"precision": 38
+								},
+								"sink": {
+									"name": "C3Flag",
+									"type": "Decimal",
+									"physicalType": "DECIMAL"
+								}
+							},
+							{
+								"source": {
+									"name": "C4RestrictionsOnGathering",
+									"type": "Decimal",
+									"physicalType": "DECIMAL",
+									"scale": 18,
+									"precision": 38
+								},
+								"sink": {
+									"name": "C4RestrictionsOnGathering",
+									"type": "Decimal",
+									"physicalType": "DECIMAL"
+								}
+							},
+							{
+								"source": {
+									"name": "C4_Flag",
+									"type": "Decimal",
+									"physicalType": "DECIMAL",
+									"scale": 18,
+									"precision": 38
+								},
+								"sink": {
+									"name": "C4_Flag",
+									"type": "Decimal",
+									"physicalType": "DECIMAL"
+								}
+							},
+							{
+								"source": {
+									"name": "C5_Closepublictransport",
+									"type": "Decimal",
+									"physicalType": "DECIMAL",
+									"scale": 18,
+									"precision": 38
+								},
+								"sink": {
+									"name": "C5_Closepublictransport",
+									"type": "Decimal",
+									"physicalType": "DECIMAL"
+								}
+							},
+							{
+								"source": {
+									"name": "C5_Flag",
+									"type": "Decimal",
+									"physicalType": "DECIMAL",
+									"scale": 18,
+									"precision": 38
+								},
+								"sink": {
+									"name": "C5_Flag",
+									"type": "Decimal",
+									"physicalType": "DECIMAL"
+								}
+							},
+							{
+								"source": {
+									"name": "C6Stayathomerequirements",
+									"type": "Decimal",
+									"physicalType": "DECIMAL",
+									"scale": 18,
+									"precision": 38
+								},
+								"sink": {
+									"name": "C6Stayathomerequirements",
+									"type": "Decimal",
+									"physicalType": "DECIMAL"
+								}
+							},
+							{
+								"source": {
+									"name": "C6Flag",
+									"type": "Decimal",
+									"physicalType": "DECIMAL",
+									"scale": 18,
+									"precision": 38
+								},
+								"sink": {
+									"name": "C6Flag",
+									"type": "Decimal",
+									"physicalType": "DECIMAL"
+								}
+							},
+							{
+								"source": {
+									"name": "C7Restrictionsoninternalmovement",
+									"type": "Decimal",
+									"physicalType": "DECIMAL",
+									"scale": 18,
+									"precision": 38
+								},
+								"sink": {
+									"name": "C7Restrictionsoninternalmovement",
+									"type": "Decimal",
+									"physicalType": "DECIMAL"
+								}
+							},
+							{
+								"source": {
+									"name": "C7Flag",
+									"type": "Decimal",
+									"physicalType": "DECIMAL",
+									"scale": 18,
+									"precision": 38
+								},
+								"sink": {
+									"name": "C7Flag",
+									"type": "Decimal",
+									"physicalType": "DECIMAL"
+								}
+							},
+							{
+								"source": {
+									"name": "C8Internationaltravelcontrols",
+									"type": "Decimal",
+									"physicalType": "DECIMAL",
+									"scale": 18,
+									"precision": 38
+								},
+								"sink": {
+									"name": "C8Internationaltravelcontrols",
+									"type": "Decimal",
+									"physicalType": "DECIMAL"
+								}
+							},
+							{
+								"source": {
+									"name": "E1Incomesupport",
+									"type": "Decimal",
+									"physicalType": "DECIMAL",
+									"scale": 18,
+									"precision": 38
+								},
+								"sink": {
+									"name": "E1Incomesupport",
+									"type": "Decimal",
+									"physicalType": "DECIMAL"
+								}
+							},
+							{
+								"source": {
+									"name": "E1Flag",
+									"type": "Decimal",
+									"physicalType": "DECIMAL",
+									"scale": 18,
+									"precision": 38
+								},
+								"sink": {
+									"name": "E1Flag",
+									"type": "Decimal",
+									"physicalType": "DECIMAL"
+								}
+							},
+							{
+								"source": {
+									"name": "E2_Debtcontractrelief",
+									"type": "Decimal",
+									"physicalType": "DECIMAL",
+									"scale": 18,
+									"precision": 38
+								},
+								"sink": {
+									"name": "E2_Debtcontractrelief",
+									"type": "Decimal",
+									"physicalType": "DECIMAL"
+								}
+							},
+							{
+								"source": {
+									"name": "E3Fiscalmeasures",
+									"type": "Decimal",
+									"physicalType": "DECIMAL",
+									"scale": 18,
+									"precision": 38
+								},
+								"sink": {
+									"name": "E3Fiscalmeasures",
+									"type": "Decimal",
+									"physicalType": "DECIMAL"
+								}
+							},
+							{
+								"source": {
+									"name": "E4Internationalsupport",
+									"type": "Decimal",
+									"physicalType": "DECIMAL",
+									"scale": 18,
+									"precision": 38
+								},
+								"sink": {
+									"name": "E4Internationalsupport",
+									"type": "Decimal",
+									"physicalType": "DECIMAL"
+								}
+							},
+							{
+								"source": {
+									"name": "H1Publicinformationcampaigns",
+									"type": "Decimal",
+									"physicalType": "DECIMAL",
+									"scale": 18,
+									"precision": 38
+								},
+								"sink": {
+									"name": "H1Publicinformationcampaigns",
+									"type": "Decimal",
+									"physicalType": "DECIMAL"
+								}
+							},
+							{
+								"source": {
+									"name": "H1Flag",
+									"type": "Decimal",
+									"physicalType": "DECIMAL",
+									"scale": 18,
+									"precision": 38
+								},
+								"sink": {
+									"name": "H1Flag",
+									"type": "Decimal",
+									"physicalType": "DECIMAL"
+								}
+							},
+							{
+								"source": {
+									"name": "H2Testingpolicy",
+									"type": "Decimal",
+									"physicalType": "DECIMAL",
+									"scale": 18,
+									"precision": 38
+								},
+								"sink": {
+									"name": "H2Testingpolicy",
+									"type": "Decimal",
+									"physicalType": "DECIMAL"
+								}
+							},
+							{
+								"source": {
+									"name": "H3Contacttracing",
+									"type": "Decimal",
+									"physicalType": "DECIMAL",
+									"scale": 18,
+									"precision": 38
+								},
+								"sink": {
+									"name": "H3Contacttracing",
+									"type": "Decimal",
+									"physicalType": "DECIMAL"
+								}
+							},
+							{
+								"source": {
+									"name": "H4Emergencyinvestmentinhealthcare",
+									"type": "Decimal",
+									"physicalType": "DECIMAL",
+									"scale": 18,
+									"precision": 38
+								},
+								"sink": {
+									"name": "H4Emergencyinvestmentinhealthcare",
+									"type": "Decimal",
+									"physicalType": "DECIMAL"
+								}
+							},
+							{
+								"source": {
+									"name": "H5Investmentinvaccines",
+									"type": "Decimal",
+									"physicalType": "DECIMAL",
+									"scale": 18,
+									"precision": 38
+								},
+								"sink": {
+									"name": "H5Investmentinvaccines",
+									"type": "Decimal",
+									"physicalType": "DECIMAL"
+								}
+							},
+							{
+								"source": {
+									"name": "H6FacialCoverings",
+									"type": "Decimal",
+									"physicalType": "DECIMAL",
+									"scale": 18,
+									"precision": 38
+								},
+								"sink": {
+									"name": "H6FacialCoverings",
+									"type": "Decimal",
+									"physicalType": "DECIMAL"
+								}
+							},
+							{
+								"source": {
+									"name": "H6Flag",
+									"type": "Decimal",
+									"physicalType": "DECIMAL",
+									"scale": 18,
+									"precision": 38
+								},
+								"sink": {
+									"name": "H6Flag",
+									"type": "Decimal",
+									"physicalType": "DECIMAL"
+								}
+							},
+							{
+								"source": {
+									"name": "H7Vaccinationpolicy",
+									"type": "Decimal",
+									"physicalType": "DECIMAL",
+									"scale": 18,
+									"precision": 38
+								},
+								"sink": {
+									"name": "H7Vaccinationpolicy",
+									"type": "Decimal",
+									"physicalType": "DECIMAL"
+								}
+							},
+							{
+								"source": {
+									"name": "H7Flag",
+									"type": "Decimal",
+									"physicalType": "DECIMAL",
+									"scale": 18,
+									"precision": 38
+								},
+								"sink": {
+									"name": "H7Flag",
+									"type": "Decimal",
+									"physicalType": "DECIMAL"
+								}
+							},
+							{
+								"source": {
+									"name": "H8Protectionofelderlypeople",
+									"type": "Decimal",
+									"physicalType": "DECIMAL",
+									"scale": 18,
+									"precision": 38
+								},
+								"sink": {
+									"name": "H8Protectionofelderlypeople",
+									"type": "Decimal",
+									"physicalType": "DECIMAL"
+								}
+							},
+							{
+								"source": {
+									"name": "H8Flag",
+									"type": "Decimal",
+									"physicalType": "DECIMAL",
+									"scale": 18,
+									"precision": 38
+								},
+								"sink": {
+									"name": "H8Flag",
+									"type": "Decimal",
+									"physicalType": "DECIMAL"
+								}
+							},
+							{
+								"source": {
+									"name": "M1Wildcard",
+									"type": "Int64",
+									"physicalType": "INT64"
+								},
+								"sink": {
+									"name": "M1Wildcard",
+									"type": "Int64",
+									"physicalType": "INT_64"
+								}
+							},
+							{
+								"source": {
+									"name": "StringencyIndex",
+									"type": "Decimal",
+									"physicalType": "DECIMAL",
+									"scale": 18,
+									"precision": 38
+								},
+								"sink": {
+									"name": "StringencyIndex",
+									"type": "Decimal",
+									"physicalType": "DECIMAL"
+								}
+							},
+							{
+								"source": {
+									"name": "StringencyIndexForDisplay",
+									"type": "Decimal",
+									"physicalType": "DECIMAL",
+									"scale": 18,
+									"precision": 38
+								},
+								"sink": {
+									"name": "StringencyIndexForDisplay",
+									"type": "Decimal",
+									"physicalType": "DECIMAL"
+								}
+							},
+							{
+								"source": {
+									"name": "StringencyLegacyIndex",
+									"type": "Decimal",
+									"physicalType": "DECIMAL",
+									"scale": 18,
+									"precision": 38
+								},
+								"sink": {
+									"name": "StringencyLegacyIndex",
+									"type": "Decimal",
+									"physicalType": "DECIMAL"
+								}
+							},
+							{
+								"source": {
+									"name": "StringencyLegacyIndexForDisplay",
+									"type": "Decimal",
+									"physicalType": "DECIMAL",
+									"scale": 18,
+									"precision": 38
+								},
+								"sink": {
+									"name": "StringencyLegacyIndexForDisplay",
+									"type": "Decimal",
+									"physicalType": "DECIMAL"
+								}
+							},
+							{
+								"source": {
+									"name": "GovernmentResponseIndex",
+									"type": "Decimal",
+									"physicalType": "DECIMAL",
+									"scale": 18,
+									"precision": 38
+								},
+								"sink": {
+									"name": "GovernmentResponseIndex",
+									"type": "Decimal",
+									"physicalType": "DECIMAL"
+								}
+							},
+							{
+								"source": {
+									"name": "GovernmentResponseIndexForDisplay",
+									"type": "Decimal",
+									"physicalType": "DECIMAL",
+									"scale": 18,
+									"precision": 38
+								},
+								"sink": {
+									"name": "GovernmentResponseIndexForDisplay",
+									"type": "Decimal",
+									"physicalType": "DECIMAL"
+								}
+							},
+							{
+								"source": {
+									"name": "ContainmentHealthIndex",
+									"type": "Decimal",
+									"physicalType": "DECIMAL",
+									"scale": 18,
+									"precision": 38
+								},
+								"sink": {
+									"name": "ContainmentHealthIndex",
+									"type": "Decimal",
+									"physicalType": "DECIMAL"
+								}
+							},
+							{
+								"source": {
+									"name": "ContainmentHealthIndexForDisplay",
+									"type": "Decimal",
+									"physicalType": "DECIMAL",
+									"scale": 18,
+									"precision": 38
+								},
+								"sink": {
+									"name": "ContainmentHealthIndexForDisplay",
+									"type": "Decimal",
+									"physicalType": "DECIMAL"
+								}
+							},
+							{
+								"source": {
+									"name": "EconomicSupportIndex",
+									"type": "Decimal",
+									"physicalType": "DECIMAL",
+									"scale": 18,
+									"precision": 38
+								},
+								"sink": {
+									"name": "EconomicSupportIndex",
+									"type": "Decimal",
+									"physicalType": "DECIMAL"
+								}
+							},
+							{
+								"source": {
+									"name": "EconomicSupportIndexForDisplay",
+									"type": "Decimal",
+									"physicalType": "DECIMAL",
+									"scale": 18,
+									"precision": 38
+								},
+								"sink": {
+									"name": "EconomicSupportIndexForDisplay",
+									"type": "Decimal",
+									"physicalType": "DECIMAL"
+								}
+							},
+							{
+								"source": {
+									"name": "id",
+									"type": "String",
+									"physicalType": "UTF8"
+								},
+								"sink": {
+									"name": "id",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "_etag",
+									"type": "String",
+									"physicalType": "UTF8"
+								},
+								"sink": {
+									"name": "_etag",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "_attachments",
+									"type": "String",
+									"physicalType": "UTF8"
+								},
+								"sink": {
+									"name": "_attachments",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "_ts",
+									"type": "Int64",
+									"physicalType": "INT64"
+								},
+								"sink": {
+									"name": "_ts",
+									"type": "Int64",
+									"physicalType": "INT_64"
+								}
+							}
+						],
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "Parquet3",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "Parquet10",
+						"type": "DatasetReference"
+					}
+				]
+			}
+		],
+		"annotations": [],
+		"lastPublishTime": "2024-04-04T21:24:49Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}
