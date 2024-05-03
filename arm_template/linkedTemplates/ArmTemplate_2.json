@@ -1,0 +1,2443 @@
+{
+    "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "factoryName": {
+            "type": "string",
+            "metadata": "Data Factory name",
+            "defaultValue": "team0003"
+        },
+        "SqlServer2_connectionString": {
+            "type": "secureString",
+            "metadata": "Secure string for 'connectionString' of 'SqlServer2'"
+        }
+    },
+    "variables": {
+        "factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+    },
+    "resources": [
+        {
+            "name": "[concat(parameters('factoryName'), '/Parquet8')]",
+            "type": "Microsoft.DataFactory/factories/datasets",
+            "apiVersion": "2018-06-01",
+            "properties": {
+                "linkedServiceName": {
+                    "referenceName": "AzureBlobStorage1",
+                    "type": "LinkedServiceReference"
+                },
+                "annotations": [],
+                "type": "Parquet",
+                "typeProperties": {
+                    "location": {
+                        "type": "AzureBlobStorageLocation",
+                        "container": "ods"
+                    },
+                    "compressionCodec": "snappy"
+                },
+                "schema": []
+            },
+            "dependsOn": []
+        },
+        {
+            "name": "[concat(parameters('factoryName'), '/Parquet9')]",
+            "type": "Microsoft.DataFactory/factories/datasets",
+            "apiVersion": "2018-06-01",
+            "properties": {
+                "linkedServiceName": {
+                    "referenceName": "AzureBlobStorage1",
+                    "type": "LinkedServiceReference"
+                },
+                "annotations": [],
+                "type": "Parquet",
+                "typeProperties": {
+                    "location": {
+                        "type": "AzureBlobStorageLocation",
+                        "container": "ods"
+                    },
+                    "compressionCodec": "snappy"
+                },
+                "schema": []
+            },
+            "dependsOn": []
+        },
+        {
+            "name": "[concat(parameters('factoryName'), '/Recoveries')]",
+            "type": "Microsoft.DataFactory/factories/datasets",
+            "apiVersion": "2018-06-01",
+            "properties": {
+                "linkedServiceName": {
+                    "referenceName": "AzureDataLakeStorage1",
+                    "type": "LinkedServiceReference"
+                },
+                "annotations": [],
+                "type": "Parquet",
+                "typeProperties": {
+                    "location": {
+                        "type": "AzureBlobFSLocation",
+                        "fileName": "dbo.Recoveries.parquet",
+                        "folderPath": "Recoveries",
+                        "fileSystem": "ods"
+                    },
+                    "compressionCodec": "snappy"
+                },
+                "schema": []
+            },
+            "dependsOn": []
+        },
+        {
+            "name": "[concat(parameters('factoryName'), '/SqlServerCountry')]",
+            "type": "Microsoft.DataFactory/factories/datasets",
+            "apiVersion": "2018-06-01",
+            "properties": {
+                "linkedServiceName": {
+                    "referenceName": "SqlServer1",
+                    "type": "LinkedServiceReference"
+                },
+                "annotations": [],
+                "type": "SqlServerTable",
+                "schema": [],
+                "typeProperties": {
+                    "schema": "dbo",
+                    "table": "Country"
+                }
+            },
+            "dependsOn": []
+        },
+        {
+            "name": "[concat(parameters('factoryName'), '/SqlServerTable1Covid19_Metrics')]",
+            "type": "Microsoft.DataFactory/factories/datasets",
+            "apiVersion": "2018-06-01",
+            "properties": {
+                "linkedServiceName": {
+                    "referenceName": "SqlServer1",
+                    "type": "LinkedServiceReference"
+                },
+                "annotations": [],
+                "type": "SqlServerTable",
+                "schema": [],
+                "typeProperties": {
+                    "schema": "dbo",
+                    "table": "Covid19_Metrics"
+                }
+            },
+            "dependsOn": []
+        },
+        {
+            "name": "[concat(parameters('factoryName'), '/SqlServerTable1Dates')]",
+            "type": "Microsoft.DataFactory/factories/datasets",
+            "apiVersion": "2018-06-01",
+            "properties": {
+                "linkedServiceName": {
+                    "referenceName": "SqlServer1",
+                    "type": "LinkedServiceReference"
+                },
+                "annotations": [],
+                "type": "SqlServerTable",
+                "schema": [],
+                "typeProperties": {
+                    "schema": "dbo",
+                    "table": "Dates"
+                }
+            },
+            "dependsOn": []
+        },
+        {
+            "name": "[concat(parameters('factoryName'), '/countryvm')]",
+            "type": "Microsoft.DataFactory/factories/datasets",
+            "apiVersion": "2018-06-01",
+            "properties": {
+                "linkedServiceName": {
+                    "referenceName": "AzureDataLakeStorage1",
+                    "type": "LinkedServiceReference"
+                },
+                "annotations": [],
+                "type": "Parquet",
+                "typeProperties": {
+                    "location": {
+                        "type": "AzureBlobFSLocation",
+                        "fileSystem": "newvm"
+                    },
+                    "compressionCodec": "snappy"
+                },
+                "schema": []
+            },
+            "dependsOn": []
+        },
+        {
+            "name": "[concat(parameters('factoryName'), '/datesvm')]",
+            "type": "Microsoft.DataFactory/factories/datasets",
+            "apiVersion": "2018-06-01",
+            "properties": {
+                "linkedServiceName": {
+                    "referenceName": "AzureDataLakeStorage1",
+                    "type": "LinkedServiceReference"
+                },
+                "annotations": [],
+                "type": "Parquet",
+                "typeProperties": {
+                    "location": {
+                        "type": "AzureBlobFSLocation",
+                        "fileSystem": "newvm"
+                    },
+                    "compressionCodec": "snappy"
+                },
+                "schema": [
+                    {
+                        "name": "Country",
+                        "type": "UTF8"
+                    },
+                    {
+                        "name": "CountryCode",
+                        "type": "UTF8"
+                    },
+                    {
+                        "name": "Latitude",
+                        "type": "DECIMAL",
+                        "precision": 10,
+                        "scale": 5
+                    },
+                    {
+                        "name": "Longitude",
+                        "type": "DECIMAL",
+                        "precision": 10,
+                        "scale": 5
+                    }
+                ]
+            },
+            "dependsOn": []
+        },
+        {
+            "name": "[concat(parameters('factoryName'), '/sqlmetric')]",
+            "type": "Microsoft.DataFactory/factories/datasets",
+            "apiVersion": "2018-06-01",
+            "properties": {
+                "linkedServiceName": {
+                    "referenceName": "AzureDataLakeStorage1",
+                    "type": "LinkedServiceReference"
+                },
+                "annotations": [],
+                "type": "Parquet",
+                "typeProperties": {
+                    "location": {
+                        "type": "AzureBlobFSLocation",
+                        "fileSystem": "newvm"
+                    },
+                    "compressionCodec": "snappy"
+                },
+                "schema": []
+            },
+            "dependsOn": []
+        },
+        {
+            "name": "[concat(parameters('factoryName'), '/SqlServer2')]",
+            "type": "Microsoft.DataFactory/factories/linkedServices",
+            "apiVersion": "2018-06-01",
+            "properties": {
+                "annotations": [],
+                "type": "SqlServer",
+                "typeProperties": {
+                    "connectionString": "[parameters('SqlServer2_connectionString')]"
+                },
+                "connectVia": {
+                    "referenceName": "integrationRuntime1",
+                    "type": "IntegrationRuntimeReference"
+                }
+            },
+            "dependsOn": []
+        },
+        {
+            "name": "[concat(parameters('factoryName'), '/CosmosDBCopy')]",
+            "type": "Microsoft.DataFactory/factories/pipelines",
+            "apiVersion": "2018-06-01",
+            "properties": {
+                "activities": [
+                    {
+                        "name": "Copy data1",
+                        "type": "Copy",
+                        "dependsOn": [],
+                        "policy": {
+                            "timeout": "0.12:00:00",
+                            "retry": 0,
+                            "retryIntervalInSeconds": 30,
+                            "secureOutput": false,
+                            "secureInput": false
+                        },
+                        "userProperties": [],
+                        "typeProperties": {
+                            "source": {
+                                "type": "CosmosDbSqlApiSource",
+                                "preferredRegions": []
+                            },
+                            "sink": {
+                                "type": "ParquetSink",
+                                "storeSettings": {
+                                    "type": "AzureBlobFSWriteSettings"
+                                },
+                                "formatSettings": {
+                                    "type": "ParquetWriteSettings"
+                                }
+                            },
+                            "enableStaging": false,
+                            "translator": {
+                                "type": "TabularTranslator",
+                                "mappings": [
+                                    {
+                                        "source": {
+                                            "path": "$['CountryName']"
+                                        },
+                                        "sink": {
+                                            "name": "CountryName",
+                                            "type": "String"
+                                        }
+                                    },
+                                    {
+                                        "source": {
+                                            "path": "$['CountryCode']"
+                                        },
+                                        "sink": {
+                                            "name": "CountryCode",
+                                            "type": "String"
+                                        }
+                                    },
+                                    {
+                                        "source": {
+                                            "path": "$['Jurisdiction']"
+                                        },
+                                        "sink": {
+                                            "name": "Jurisdiction",
+                                            "type": "String"
+                                        }
+                                    },
+                                    {
+                                        "source": {
+                                            "path": "$['Date']"
+                                        },
+                                        "sink": {
+                                            "name": "Date",
+                                            "type": "String"
+                                        }
+                                    },
+                                    {
+                                        "source": {
+                                            "path": "$['C1_School closing']"
+                                        },
+                                        "sink": {
+                                            "name": "C1SchoolClosing",
+                                            "type": "Decimal"
+                                        }
+                                    },
+                                    {
+                                        "source": {
+                                            "path": "$['C1_Flag']"
+                                        },
+                                        "sink": {
+                                            "name": "C1Flag",
+                                            "type": "Decimal"
+                                        }
+                                    },
+                                    {
+                                        "source": {
+                                            "path": "$['C2_Workplace closing']"
+                                        },
+                                        "sink": {
+                                            "name": "C2WorkplaceClosing",
+                                            "type": "Decimal"
+                                        }
+                                    },
+                                    {
+                                        "source": {
+                                            "path": "$['C2_Flag']"
+                                        },
+                                        "sink": {
+                                            "name": "C2Flag",
+                                            "type": "Decimal"
+                                        }
+                                    },
+                                    {
+                                        "source": {
+                                            "path": "$['C3_Cancel public events']"
+                                        },
+                                        "sink": {
+                                            "name": "C3CancelPublicEvents",
+                                            "type": "Decimal"
+                                        }
+                                    },
+                                    {
+                                        "source": {
+                                            "path": "$['C3_Flag']"
+                                        },
+                                        "sink": {
+                                            "name": "C3Flag",
+                                            "type": "Decimal"
+                                        }
+                                    },
+                                    {
+                                        "source": {
+                                            "path": "$['C4_Restrictions on gatherings']"
+                                        },
+                                        "sink": {
+                                            "name": "C4RestrictionsOnGathering",
+                                            "type": "Decimal"
+                                        }
+                                    },
+                                    {
+                                        "source": {
+                                            "path": "$['C4_Flag']"
+                                        },
+                                        "sink": {
+                                            "name": "C4_Flag",
+                                            "type": "Decimal"
+                                        }
+                                    },
+                                    {
+                                        "source": {
+                                            "path": "$['C5_Close public transport']"
+                                        },
+                                        "sink": {
+                                            "name": "C5_Closepublictransport",
+                                            "type": "Decimal"
+                                        }
+                                    },
+                                    {
+                                        "source": {
+                                            "path": "$['C5_Flag']"
+                                        },
+                                        "sink": {
+                                            "name": "C5_Flag",
+                                            "type": "Decimal"
+                                        }
+                                    },
+                                    {
+                                        "source": {
+                                            "path": "$['C6_Stay at home requirements']"
+                                        },
+                                        "sink": {
+                                            "name": "C6Stayathomerequirements",
+                                            "type": "Decimal"
+                                        }
+                                    },
+                                    {
+                                        "source": {
+                                            "path": "$['C6_Flag']"
+                                        },
+                                        "sink": {
+                                            "name": "C6Flag",
+                                            "type": "Decimal"
+                                        }
+                                    },
+                                    {
+                                        "source": {
+                                            "path": "$['C7_Restrictions on internal movement']"
+                                        },
+                                        "sink": {
+                                            "name": "C7Restrictionsoninternalmovement",
+                                            "type": "Decimal"
+                                        }
+                                    },
+                                    {
+                                        "source": {
+                                            "path": "$['C7_Flag']"
+                                        },
+                                        "sink": {
+                                            "name": "C7Flag",
+                                            "type": "Decimal"
+                                        }
+                                    },
+                                    {
+                                        "source": {
+                                            "path": "$['C8_International travel controls']"
+                                        },
+                                        "sink": {
+                                            "name": "C8Internationaltravelcontrols",
+                                            "type": "Decimal"
+                                        }
+                                    },
+                                    {
+                                        "source": {
+                                            "path": "$['E1_Income support']"
+                                        },
+                                        "sink": {
+                                            "name": "E1Incomesupport",
+                                            "type": "Decimal"
+                                        }
+                                    },
+                                    {
+                                        "source": {
+                                            "path": "$['E1_Flag']"
+                                        },
+                                        "sink": {
+                                            "name": "E1Flag",
+                                            "type": "Decimal"
+                                        }
+                                    },
+                                    {
+                                        "source": {
+                                            "path": "$['E2_Debt contract relief']"
+                                        },
+                                        "sink": {
+                                            "name": "E2_Debtcontractrelief",
+                                            "type": "Decimal"
+                                        }
+                                    },
+                                    {
+                                        "source": {
+                                            "path": "$['E3_Fiscal measures']"
+                                        },
+                                        "sink": {
+                                            "name": "E3Fiscalmeasures",
+                                            "type": "Decimal"
+                                        }
+                                    },
+                                    {
+                                        "source": {
+                                            "path": "$['E4_International support']"
+                                        },
+                                        "sink": {
+                                            "name": "E4Internationalsupport",
+                                            "type": "Decimal"
+                                        }
+                                    },
+                                    {
+                                        "source": {
+                                            "path": "$['H1_Public information campaigns']"
+                                        },
+                                        "sink": {
+                                            "name": "H1Publicinformationcampaigns",
+                                            "type": "Decimal"
+                                        }
+                                    },
+                                    {
+                                        "source": {
+                                            "path": "$['H1_Flag']"
+                                        },
+                                        "sink": {
+                                            "name": "H1Flag",
+                                            "type": "Decimal"
+                                        }
+                                    },
+                                    {
+                                        "source": {
+                                            "path": "$['H2_Testing policy']"
+                                        },
+                                        "sink": {
+                                            "name": "H2Testingpolicy",
+                                            "type": "Decimal"
+                                        }
+                                    },
+                                    {
+                                        "source": {
+                                            "path": "$['H3_Contact tracing']"
+                                        },
+                                        "sink": {
+                                            "name": "H3Contacttracing",
+                                            "type": "Decimal"
+                                        }
+                                    },
+                                    {
+                                        "source": {
+                                            "path": "$['H4_Emergency investment in healthcare']"
+                                        },
+                                        "sink": {
+                                            "name": "H4Emergencyinvestmentinhealthcare",
+                                            "type": "Decimal"
+                                        }
+                                    },
+                                    {
+                                        "source": {
+                                            "path": "$['H5_Investment in vaccines']"
+                                        },
+                                        "sink": {
+                                            "name": "H5Investmentinvaccines",
+                                            "type": "Decimal"
+                                        }
+                                    },
+                                    {
+                                        "source": {
+                                            "path": "$['H6_Facial Coverings']"
+                                        },
+                                        "sink": {
+                                            "name": "H6FacialCoverings",
+                                            "type": "Decimal"
+                                        }
+                                    },
+                                    {
+                                        "source": {
+                                            "path": "$['H6_Flag']"
+                                        },
+                                        "sink": {
+                                            "name": "H6Flag",
+                                            "type": "Decimal"
+                                        }
+                                    },
+                                    {
+                                        "source": {
+                                            "path": "$['H7_Vaccination policy']"
+                                        },
+                                        "sink": {
+                                            "name": "H7Vaccinationpolicy",
+                                            "type": "Decimal"
+                                        }
+                                    },
+                                    {
+                                        "source": {
+                                            "path": "$['H7_Flag']"
+                                        },
+                                        "sink": {
+                                            "name": "H7Flag",
+                                            "type": "Decimal"
+                                        }
+                                    },
+                                    {
+                                        "source": {
+                                            "path": "$['H8_Protection of elderly people']"
+                                        },
+                                        "sink": {
+                                            "name": "H8Protectionofelderlypeople",
+                                            "type": "Decimal"
+                                        }
+                                    },
+                                    {
+                                        "source": {
+                                            "path": "$['H8_Flag']"
+                                        },
+                                        "sink": {
+                                            "name": "H8Flag",
+                                            "type": "Decimal"
+                                        }
+                                    },
+                                    {
+                                        "source": {
+                                            "path": "$['M1_Wildcard']"
+                                        },
+                                        "sink": {
+                                            "name": "M1Wildcard"
+                                        }
+                                    },
+                                    {
+                                        "source": {
+                                            "path": "$['StringencyIndex']"
+                                        },
+                                        "sink": {
+                                            "name": "StringencyIndex",
+                                            "type": "Decimal"
+                                        }
+                                    },
+                                    {
+                                        "source": {
+                                            "path": "$['StringencyIndexForDisplay']"
+                                        },
+                                        "sink": {
+                                            "name": "StringencyIndexForDisplay",
+                                            "type": "Decimal"
+                                        }
+                                    },
+                                    {
+                                        "source": {
+                                            "path": "$['StringencyLegacyIndex']"
+                                        },
+                                        "sink": {
+                                            "name": "StringencyLegacyIndex",
+                                            "type": "Decimal"
+                                        }
+                                    },
+                                    {
+                                        "source": {
+                                            "path": "$['StringencyLegacyIndexForDisplay']"
+                                        },
+                                        "sink": {
+                                            "name": "StringencyLegacyIndexForDisplay",
+                                            "type": "Decimal"
+                                        }
+                                    },
+                                    {
+                                        "source": {
+                                            "path": "$['GovernmentResponseIndex']"
+                                        },
+                                        "sink": {
+                                            "name": "GovernmentResponseIndex",
+                                            "type": "Decimal"
+                                        }
+                                    },
+                                    {
+                                        "source": {
+                                            "path": "$['GovernmentResponseIndexForDisplay']"
+                                        },
+                                        "sink": {
+                                            "name": "GovernmentResponseIndexForDisplay",
+                                            "type": "Decimal"
+                                        }
+                                    },
+                                    {
+                                        "source": {
+                                            "path": "$['ContainmentHealthIndex']"
+                                        },
+                                        "sink": {
+                                            "name": "ContainmentHealthIndex",
+                                            "type": "Decimal"
+                                        }
+                                    },
+                                    {
+                                        "source": {
+                                            "path": "$['ContainmentHealthIndexForDisplay']"
+                                        },
+                                        "sink": {
+                                            "name": "ContainmentHealthIndexForDisplay",
+                                            "type": "Decimal"
+                                        }
+                                    },
+                                    {
+                                        "source": {
+                                            "path": "$['EconomicSupportIndex']"
+                                        },
+                                        "sink": {
+                                            "name": "EconomicSupportIndex",
+                                            "type": "Decimal"
+                                        }
+                                    },
+                                    {
+                                        "source": {
+                                            "path": "$['EconomicSupportIndexForDisplay']"
+                                        },
+                                        "sink": {
+                                            "name": "EconomicSupportIndexForDisplay",
+                                            "type": "Decimal"
+                                        }
+                                    },
+                                    {
+                                        "source": {
+                                            "path": "$['id']"
+                                        },
+                                        "sink": {
+                                            "name": "id",
+                                            "type": "String"
+                                        }
+                                    },
+                                    {
+                                        "source": {
+                                            "path": "$['_etag']"
+                                        },
+                                        "sink": {
+                                            "name": "_etag",
+                                            "type": "String"
+                                        }
+                                    },
+                                    {
+                                        "source": {
+                                            "path": "$['_attachments']"
+                                        },
+                                        "sink": {
+                                            "name": "_attachments",
+                                            "type": "String"
+                                        }
+                                    },
+                                    {
+                                        "source": {
+                                            "path": "$['_ts']"
+                                        },
+                                        "sink": {
+                                            "name": "_ts",
+                                            "type": "Int64"
+                                        }
+                                    }
+                                ]
+                            }
+                        },
+                        "inputs": [
+                            {
+                                "referenceName": "CosmosDbNoSqlContainer1",
+                                "type": "DatasetReference",
+                                "parameters": {}
+                            }
+                        ],
+                        "outputs": [
+                            {
+                                "referenceName": "Parquet3",
+                                "type": "DatasetReference",
+                                "parameters": {}
+                            }
+                        ]
+                    }
+                ],
+                "policy": {
+                    "elapsedTimeMetric": {}
+                },
+                "annotations": [],
+                "lastPublishTime": "2024-04-03T13:33:55Z"
+            },
+            "dependsOn": []
+        },
+        {
+            "name": "[concat(parameters('factoryName'), '/PolicyToODS')]",
+            "type": "Microsoft.DataFactory/factories/pipelines",
+            "apiVersion": "2018-06-01",
+            "properties": {
+                "activities": [
+                    {
+                        "name": "Copy data1",
+                        "type": "Copy",
+                        "dependsOn": [],
+                        "policy": {
+                            "timeout": "0.12:00:00",
+                            "retry": 0,
+                            "retryIntervalInSeconds": 30,
+                            "secureOutput": false,
+                            "secureInput": false
+                        },
+                        "userProperties": [],
+                        "typeProperties": {
+                            "source": {
+                                "type": "ParquetSource",
+                                "storeSettings": {
+                                    "type": "AzureBlobFSReadSettings",
+                                    "recursive": true,
+                                    "enablePartitionDiscovery": false
+                                },
+                                "formatSettings": {
+                                    "type": "ParquetReadSettings"
+                                }
+                            },
+                            "sink": {
+                                "type": "ParquetSink",
+                                "storeSettings": {
+                                    "type": "AzureBlobStorageWriteSettings"
+                                },
+                                "formatSettings": {
+                                    "type": "ParquetWriteSettings"
+                                }
+                            },
+                            "enableStaging": false,
+                            "translator": {
+                                "type": "TabularTranslator",
+                                "mappings": [
+                                    {
+                                        "source": {
+                                            "name": "CountryName",
+                                            "type": "String",
+                                            "physicalType": "UTF8"
+                                        },
+                                        "sink": {
+                                            "name": "CountryName",
+                                            "type": "String",
+                                            "physicalType": "UTF8"
+                                        }
+                                    },
+                                    {
+                                        "source": {
+                                            "name": "CountryCode",
+                                            "type": "String",
+                                            "physicalType": "UTF8"
+                                        },
+                                        "sink": {
+                                            "name": "CountryCode",
+                                            "type": "String",
+                                            "physicalType": "UTF8"
+                                        }
+                                    },
+                                    {
+                                        "source": {
+                                            "name": "Jurisdiction",
+                                            "type": "String",
+                                            "physicalType": "UTF8"
+                                        },
+                                        "sink": {
+                                            "name": "Jurisdiction",
+                                            "type": "String",
+                                            "physicalType": "UTF8"
+                                        }
+                                    },
+                                    {
+                                        "source": {
+                                            "name": "Date",
+                                            "type": "String",
+                                            "physicalType": "UTF8"
+                                        },
+                                        "sink": {
+                                            "name": "Date",
+                                            "type": "String",
+                                            "physicalType": "UTF8"
+                                        }
+                                    },
+                                    {
+                                        "source": {
+                                            "name": "C1SchoolClosing",
+                                            "type": "Decimal",
+                                            "physicalType": "DECIMAL",
+                                            "scale": 18,
+                                            "precision": 38
+                                        },
+                                        "sink": {
+                                            "name": "C1SchoolClosing",
+                                            "type": "Decimal",
+                                            "physicalType": "DECIMAL"
+                                        }
+                                    },
+                                    {
+                                        "source": {
+                                            "name": "C1Flag",
+                                            "type": "Decimal",
+                                            "physicalType": "DECIMAL",
+                                            "scale": 18,
+                                            "precision": 38
+                                        },
+                                        "sink": {
+                                            "name": "C1Flag",
+                                            "type": "Decimal",
+                                            "physicalType": "DECIMAL"
+                                        }
+                                    },
+                                    {
+                                        "source": {
+                                            "name": "C2WorkplaceClosing",
+                                            "type": "Decimal",
+                                            "physicalType": "DECIMAL",
+                                            "scale": 18,
+                                            "precision": 38
+                                        },
+                                        "sink": {
+                                            "name": "C2WorkplaceClosing",
+                                            "type": "Decimal",
+                                            "physicalType": "DECIMAL"
+                                        }
+                                    },
+                                    {
+                                        "source": {
+                                            "name": "C2Flag",
+                                            "type": "Decimal",
+                                            "physicalType": "DECIMAL",
+                                            "scale": 18,
+                                            "precision": 38
+                                        },
+                                        "sink": {
+                                            "name": "C2Flag",
+                                            "type": "Decimal",
+                                            "physicalType": "DECIMAL"
+                                        }
+                                    },
+                                    {
+                                        "source": {
+                                            "name": "C3CancelPublicEvents",
+                                            "type": "Decimal",
+                                            "physicalType": "DECIMAL",
+                                            "scale": 18,
+                                            "precision": 38
+                                        },
+                                        "sink": {
+                                            "name": "C3CancelPublicEvents",
+                                            "type": "Decimal",
+                                            "physicalType": "DECIMAL"
+                                        }
+                                    },
+                                    {
+                                        "source": {
+                                            "name": "C3Flag",
+                                            "type": "Decimal",
+                                            "physicalType": "DECIMAL",
+                                            "scale": 18,
+                                            "precision": 38
+                                        },
+                                        "sink": {
+                                            "name": "C3Flag",
+                                            "type": "Decimal",
+                                            "physicalType": "DECIMAL"
+                                        }
+                                    },
+                                    {
+                                        "source": {
+                                            "name": "C4RestrictionsOnGathering",
+                                            "type": "Decimal",
+                                            "physicalType": "DECIMAL",
+                                            "scale": 18,
+                                            "precision": 38
+                                        },
+                                        "sink": {
+                                            "name": "C4RestrictionsOnGathering",
+                                            "type": "Decimal",
+                                            "physicalType": "DECIMAL"
+                                        }
+                                    },
+                                    {
+                                        "source": {
+                                            "name": "C4_Flag",
+                                            "type": "Decimal",
+                                            "physicalType": "DECIMAL",
+                                            "scale": 18,
+                                            "precision": 38
+                                        },
+                                        "sink": {
+                                            "name": "C4_Flag",
+                                            "type": "Decimal",
+                                            "physicalType": "DECIMAL"
+                                        }
+                                    },
+                                    {
+                                        "source": {
+                                            "name": "C5_Closepublictransport",
+                                            "type": "Decimal",
+                                            "physicalType": "DECIMAL",
+                                            "scale": 18,
+                                            "precision": 38
+                                        },
+                                        "sink": {
+                                            "name": "C5_Closepublictransport",
+                                            "type": "Decimal",
+                                            "physicalType": "DECIMAL"
+                                        }
+                                    },
+                                    {
+                                        "source": {
+                                            "name": "C5_Flag",
+                                            "type": "Decimal",
+                                            "physicalType": "DECIMAL",
+                                            "scale": 18,
+                                            "precision": 38
+                                        },
+                                        "sink": {
+                                            "name": "C5_Flag",
+                                            "type": "Decimal",
+                                            "physicalType": "DECIMAL"
+                                        }
+                                    },
+                                    {
+                                        "source": {
+                                            "name": "C6Stayathomerequirements",
+                                            "type": "Decimal",
+                                            "physicalType": "DECIMAL",
+                                            "scale": 18,
+                                            "precision": 38
+                                        },
+                                        "sink": {
+                                            "name": "C6Stayathomerequirements",
+                                            "type": "Decimal",
+                                            "physicalType": "DECIMAL"
+                                        }
+                                    },
+                                    {
+                                        "source": {
+                                            "name": "C6Flag",
+                                            "type": "Decimal",
+                                            "physicalType": "DECIMAL",
+                                            "scale": 18,
+                                            "precision": 38
+                                        },
+                                        "sink": {
+                                            "name": "C6Flag",
+                                            "type": "Decimal",
+                                            "physicalType": "DECIMAL"
+                                        }
+                                    },
+                                    {
+                                        "source": {
+                                            "name": "C7Restrictionsoninternalmovement",
+                                            "type": "Decimal",
+                                            "physicalType": "DECIMAL",
+                                            "scale": 18,
+                                            "precision": 38
+                                        },
+                                        "sink": {
+                                            "name": "C7Restrictionsoninternalmovement",
+                                            "type": "Decimal",
+                                            "physicalType": "DECIMAL"
+                                        }
+                                    },
+                                    {
+                                        "source": {
+                                            "name": "C7Flag",
+                                            "type": "Decimal",
+                                            "physicalType": "DECIMAL",
+                                            "scale": 18,
+                                            "precision": 38
+                                        },
+                                        "sink": {
+                                            "name": "C7Flag",
+                                            "type": "Decimal",
+                                            "physicalType": "DECIMAL"
+                                        }
+                                    },
+                                    {
+                                        "source": {
+                                            "name": "C8Internationaltravelcontrols",
+                                            "type": "Decimal",
+                                            "physicalType": "DECIMAL",
+                                            "scale": 18,
+                                            "precision": 38
+                                        },
+                                        "sink": {
+                                            "name": "C8Internationaltravelcontrols",
+                                            "type": "Decimal",
+                                            "physicalType": "DECIMAL"
+                                        }
+                                    },
+                                    {
+                                        "source": {
+                                            "name": "E1Incomesupport",
+                                            "type": "Decimal",
+                                            "physicalType": "DECIMAL",
+                                            "scale": 18,
+                                            "precision": 38
+                                        },
+                                        "sink": {
+                                            "name": "E1Incomesupport",
+                                            "type": "Decimal",
+                                            "physicalType": "DECIMAL"
+                                        }
+                                    },
+                                    {
+                                        "source": {
+                                            "name": "E1Flag",
+                                            "type": "Decimal",
+                                            "physicalType": "DECIMAL",
+                                            "scale": 18,
+                                            "precision": 38
+                                        },
+                                        "sink": {
+                                            "name": "E1Flag",
+                                            "type": "Decimal",
+                                            "physicalType": "DECIMAL"
+                                        }
+                                    },
+                                    {
+                                        "source": {
+                                            "name": "E2_Debtcontractrelief",
+                                            "type": "Decimal",
+                                            "physicalType": "DECIMAL",
+                                            "scale": 18,
+                                            "precision": 38
+                                        },
+                                        "sink": {
+                                            "name": "E2_Debtcontractrelief",
+                                            "type": "Decimal",
+                                            "physicalType": "DECIMAL"
+                                        }
+                                    },
+                                    {
+                                        "source": {
+                                            "name": "E3Fiscalmeasures",
+                                            "type": "Decimal",
+                                            "physicalType": "DECIMAL",
+                                            "scale": 18,
+                                            "precision": 38
+                                        },
+                                        "sink": {
+                                            "name": "E3Fiscalmeasures",
+                                            "type": "Decimal",
+                                            "physicalType": "DECIMAL"
+                                        }
+                                    },
+                                    {
+                                        "source": {
+                                            "name": "E4Internationalsupport",
+                                            "type": "Decimal",
+                                            "physicalType": "DECIMAL",
+                                            "scale": 18,
+                                            "precision": 38
+                                        },
+                                        "sink": {
+                                            "name": "E4Internationalsupport",
+                                            "type": "Decimal",
+                                            "physicalType": "DECIMAL"
+                                        }
+                                    },
+                                    {
+                                        "source": {
+                                            "name": "H1Publicinformationcampaigns",
+                                            "type": "Decimal",
+                                            "physicalType": "DECIMAL",
+                                            "scale": 18,
+                                            "precision": 38
+                                        },
+                                        "sink": {
+                                            "name": "H1Publicinformationcampaigns",
+                                            "type": "Decimal",
+                                            "physicalType": "DECIMAL"
+                                        }
+                                    },
+                                    {
+                                        "source": {
+                                            "name": "H1Flag",
+                                            "type": "Decimal",
+                                            "physicalType": "DECIMAL",
+                                            "scale": 18,
+                                            "precision": 38
+                                        },
+                                        "sink": {
+                                            "name": "H1Flag",
+                                            "type": "Decimal",
+                                            "physicalType": "DECIMAL"
+                                        }
+                                    },
+                                    {
+                                        "source": {
+                                            "name": "H2Testingpolicy",
+                                            "type": "Decimal",
+                                            "physicalType": "DECIMAL",
+                                            "scale": 18,
+                                            "precision": 38
+                                        },
+                                        "sink": {
+                                            "name": "H2Testingpolicy",
+                                            "type": "Decimal",
+                                            "physicalType": "DECIMAL"
+                                        }
+                                    },
+                                    {
+                                        "source": {
+                                            "name": "H3Contacttracing",
+                                            "type": "Decimal",
+                                            "physicalType": "DECIMAL",
+                                            "scale": 18,
+                                            "precision": 38
+                                        },
+                                        "sink": {
+                                            "name": "H3Contacttracing",
+                                            "type": "Decimal",
+                                            "physicalType": "DECIMAL"
+                                        }
+                                    },
+                                    {
+                                        "source": {
+                                            "name": "H4Emergencyinvestmentinhealthcare",
+                                            "type": "Decimal",
+                                            "physicalType": "DECIMAL",
+                                            "scale": 18,
+                                            "precision": 38
+                                        },
+                                        "sink": {
+                                            "name": "H4Emergencyinvestmentinhealthcare",
+                                            "type": "Decimal",
+                                            "physicalType": "DECIMAL"
+                                        }
+                                    },
+                                    {
+                                        "source": {
+                                            "name": "H5Investmentinvaccines",
+                                            "type": "Decimal",
+                                            "physicalType": "DECIMAL",
+                                            "scale": 18,
+                                            "precision": 38
+                                        },
+                                        "sink": {
+                                            "name": "H5Investmentinvaccines",
+                                            "type": "Decimal",
+                                            "physicalType": "DECIMAL"
+                                        }
+                                    },
+                                    {
+                                        "source": {
+                                            "name": "H6FacialCoverings",
+                                            "type": "Decimal",
+                                            "physicalType": "DECIMAL",
+                                            "scale": 18,
+                                            "precision": 38
+                                        },
+                                        "sink": {
+                                            "name": "H6FacialCoverings",
+                                            "type": "Decimal",
+                                            "physicalType": "DECIMAL"
+                                        }
+                                    },
+                                    {
+                                        "source": {
+                                            "name": "H6Flag",
+                                            "type": "Decimal",
+                                            "physicalType": "DECIMAL",
+                                            "scale": 18,
+                                            "precision": 38
+                                        },
+                                        "sink": {
+                                            "name": "H6Flag",
+                                            "type": "Decimal",
+                                            "physicalType": "DECIMAL"
+                                        }
+                                    },
+                                    {
+                                        "source": {
+                                            "name": "H7Vaccinationpolicy",
+                                            "type": "Decimal",
+                                            "physicalType": "DECIMAL",
+                                            "scale": 18,
+                                            "precision": 38
+                                        },
+                                        "sink": {
+                                            "name": "H7Vaccinationpolicy",
+                                            "type": "Decimal",
+                                            "physicalType": "DECIMAL"
+                                        }
+                                    },
+                                    {
+                                        "source": {
+                                            "name": "H7Flag",
+                                            "type": "Decimal",
+                                            "physicalType": "DECIMAL",
+                                            "scale": 18,
+                                            "precision": 38
+                                        },
+                                        "sink": {
+                                            "name": "H7Flag",
+                                            "type": "Decimal",
+                                            "physicalType": "DECIMAL"
+                                        }
+                                    },
+                                    {
+                                        "source": {
+                                            "name": "H8Protectionofelderlypeople",
+                                            "type": "Decimal",
+                                            "physicalType": "DECIMAL",
+                                            "scale": 18,
+                                            "precision": 38
+                                        },
+                                        "sink": {
+                                            "name": "H8Protectionofelderlypeople",
+                                            "type": "Decimal",
+                                            "physicalType": "DECIMAL"
+                                        }
+                                    },
+                                    {
+                                        "source": {
+                                            "name": "H8Flag",
+                                            "type": "Decimal",
+                                            "physicalType": "DECIMAL",
+                                            "scale": 18,
+                                            "precision": 38
+                                        },
+                                        "sink": {
+                                            "name": "H8Flag",
+                                            "type": "Decimal",
+                                            "physicalType": "DECIMAL"
+                                        }
+                                    },
+                                    {
+                                        "source": {
+                                            "name": "M1Wildcard",
+                                            "type": "Int64",
+                                            "physicalType": "INT64"
+                                        },
+                                        "sink": {
+                                            "name": "M1Wildcard",
+                                            "type": "Int64",
+                                            "physicalType": "INT_64"
+                                        }
+                                    },
+                                    {
+                                        "source": {
+                                            "name": "StringencyIndex",
+                                            "type": "Decimal",
+                                            "physicalType": "DECIMAL",
+                                            "scale": 18,
+                                            "precision": 38
+                                        },
+                                        "sink": {
+                                            "name": "StringencyIndex",
+                                            "type": "Decimal",
+                                            "physicalType": "DECIMAL"
+                                        }
+                                    },
+                                    {
+                                        "source": {
+                                            "name": "StringencyIndexForDisplay",
+                                            "type": "Decimal",
+                                            "physicalType": "DECIMAL",
+                                            "scale": 18,
+                                            "precision": 38
+                                        },
+                                        "sink": {
+                                            "name": "StringencyIndexForDisplay",
+                                            "type": "Decimal",
+                                            "physicalType": "DECIMAL"
+                                        }
+                                    },
+                                    {
+                                        "source": {
+                                            "name": "StringencyLegacyIndex",
+                                            "type": "Decimal",
+                                            "physicalType": "DECIMAL",
+                                            "scale": 18,
+                                            "precision": 38
+                                        },
+                                        "sink": {
+                                            "name": "StringencyLegacyIndex",
+                                            "type": "Decimal",
+                                            "physicalType": "DECIMAL"
+                                        }
+                                    },
+                                    {
+                                        "source": {
+                                            "name": "StringencyLegacyIndexForDisplay",
+                                            "type": "Decimal",
+                                            "physicalType": "DECIMAL",
+                                            "scale": 18,
+                                            "precision": 38
+                                        },
+                                        "sink": {
+                                            "name": "StringencyLegacyIndexForDisplay",
+                                            "type": "Decimal",
+                                            "physicalType": "DECIMAL"
+                                        }
+                                    },
+                                    {
+                                        "source": {
+                                            "name": "GovernmentResponseIndex",
+                                            "type": "Decimal",
+                                            "physicalType": "DECIMAL",
+                                            "scale": 18,
+                                            "precision": 38
+                                        },
+                                        "sink": {
+                                            "name": "GovernmentResponseIndex",
+                                            "type": "Decimal",
+                                            "physicalType": "DECIMAL"
+                                        }
+                                    },
+                                    {
+                                        "source": {
+                                            "name": "GovernmentResponseIndexForDisplay",
+                                            "type": "Decimal",
+                                            "physicalType": "DECIMAL",
+                                            "scale": 18,
+                                            "precision": 38
+                                        },
+                                        "sink": {
+                                            "name": "GovernmentResponseIndexForDisplay",
+                                            "type": "Decimal",
+                                            "physicalType": "DECIMAL"
+                                        }
+                                    },
+                                    {
+                                        "source": {
+                                            "name": "ContainmentHealthIndex",
+                                            "type": "Decimal",
+                                            "physicalType": "DECIMAL",
+                                            "scale": 18,
+                                            "precision": 38
+                                        },
+                                        "sink": {
+                                            "name": "ContainmentHealthIndex",
+                                            "type": "Decimal",
+                                            "physicalType": "DECIMAL"
+                                        }
+                                    },
+                                    {
+                                        "source": {
+                                            "name": "ContainmentHealthIndexForDisplay",
+                                            "type": "Decimal",
+                                            "physicalType": "DECIMAL",
+                                            "scale": 18,
+                                            "precision": 38
+                                        },
+                                        "sink": {
+                                            "name": "ContainmentHealthIndexForDisplay",
+                                            "type": "Decimal",
+                                            "physicalType": "DECIMAL"
+                                        }
+                                    },
+                                    {
+                                        "source": {
+                                            "name": "EconomicSupportIndex",
+                                            "type": "Decimal",
+                                            "physicalType": "DECIMAL",
+                                            "scale": 18,
+                                            "precision": 38
+                                        },
+                                        "sink": {
+                                            "name": "EconomicSupportIndex",
+                                            "type": "Decimal",
+                                            "physicalType": "DECIMAL"
+                                        }
+                                    },
+                                    {
+                                        "source": {
+                                            "name": "EconomicSupportIndexForDisplay",
+                                            "type": "Decimal",
+                                            "physicalType": "DECIMAL",
+                                            "scale": 18,
+                                            "precision": 38
+                                        },
+                                        "sink": {
+                                            "name": "EconomicSupportIndexForDisplay",
+                                            "type": "Decimal",
+                                            "physicalType": "DECIMAL"
+                                        }
+                                    },
+                                    {
+                                        "source": {
+                                            "name": "id",
+                                            "type": "String",
+                                            "physicalType": "UTF8"
+                                        },
+                                        "sink": {
+                                            "name": "id",
+                                            "type": "String",
+                                            "physicalType": "UTF8"
+                                        }
+                                    },
+                                    {
+                                        "source": {
+                                            "name": "_etag",
+                                            "type": "String",
+                                            "physicalType": "UTF8"
+                                        },
+                                        "sink": {
+                                            "name": "_etag",
+                                            "type": "String",
+                                            "physicalType": "UTF8"
+                                        }
+                                    },
+                                    {
+                                        "source": {
+                                            "name": "_attachments",
+                                            "type": "String",
+                                            "physicalType": "UTF8"
+                                        },
+                                        "sink": {
+                                            "name": "_attachments",
+                                            "type": "String",
+                                            "physicalType": "UTF8"
+                                        }
+                                    },
+                                    {
+                                        "source": {
+                                            "name": "_ts",
+                                            "type": "Int64",
+                                            "physicalType": "INT64"
+                                        },
+                                        "sink": {
+                                            "name": "_ts",
+                                            "type": "Int64",
+                                            "physicalType": "INT_64"
+                                        }
+                                    }
+                                ],
+                                "typeConversion": true,
+                                "typeConversionSettings": {
+                                    "allowDataTruncation": true,
+                                    "treatBooleanAsNumber": false
+                                }
+                            }
+                        },
+                        "inputs": [
+                            {
+                                "referenceName": "Parquet3",
+                                "type": "DatasetReference",
+                                "parameters": {}
+                            }
+                        ],
+                        "outputs": [
+                            {
+                                "referenceName": "Parquet10",
+                                "type": "DatasetReference",
+                                "parameters": {}
+                            }
+                        ]
+                    }
+                ],
+                "policy": {
+                    "elapsedTimeMetric": {}
+                },
+                "annotations": [],
+                "lastPublishTime": "2024-04-04T21:24:49Z"
+            },
+            "dependsOn": []
+        },
+        {
+            "name": "[concat(parameters('factoryName'), '/pipeline1')]",
+            "type": "Microsoft.DataFactory/factories/pipelines",
+            "apiVersion": "2018-06-01",
+            "properties": {
+                "activities": [
+                    {
+                        "name": "Country",
+                        "type": "Copy",
+                        "dependsOn": [],
+                        "policy": {
+                            "timeout": "0.12:00:00",
+                            "retry": 0,
+                            "retryIntervalInSeconds": 30,
+                            "secureOutput": false,
+                            "secureInput": false
+                        },
+                        "userProperties": [],
+                        "typeProperties": {
+                            "source": {
+                                "type": "AzureSqlSource",
+                                "queryTimeout": "02:00:00",
+                                "partitionOption": "None"
+                            },
+                            "sink": {
+                                "type": "ParquetSink",
+                                "storeSettings": {
+                                    "type": "AzureBlobFSWriteSettings"
+                                },
+                                "formatSettings": {
+                                    "type": "ParquetWriteSettings"
+                                }
+                            },
+                            "enableStaging": false,
+                            "translator": {
+                                "type": "TabularTranslator",
+                                "typeConversion": true,
+                                "typeConversionSettings": {
+                                    "allowDataTruncation": true,
+                                    "treatBooleanAsNumber": false
+                                }
+                            }
+                        },
+                        "inputs": [
+                            {
+                                "referenceName": "AzureSqlTable1",
+                                "type": "DatasetReference",
+                                "parameters": {}
+                            }
+                        ],
+                        "outputs": [
+                            {
+                                "referenceName": "Parquet2",
+                                "type": "DatasetReference",
+                                "parameters": {}
+                            }
+                        ]
+                    },
+                    {
+                        "name": "Metrics",
+                        "type": "Copy",
+                        "dependsOn": [],
+                        "policy": {
+                            "timeout": "0.12:00:00",
+                            "retry": 0,
+                            "retryIntervalInSeconds": 30,
+                            "secureOutput": false,
+                            "secureInput": false
+                        },
+                        "userProperties": [],
+                        "typeProperties": {
+                            "source": {
+                                "type": "AzureSqlSource",
+                                "queryTimeout": "02:00:00",
+                                "partitionOption": "None"
+                            },
+                            "sink": {
+                                "type": "ParquetSink",
+                                "storeSettings": {
+                                    "type": "AzureBlobFSWriteSettings"
+                                },
+                                "formatSettings": {
+                                    "type": "ParquetWriteSettings"
+                                }
+                            },
+                            "enableStaging": false,
+                            "translator": {
+                                "type": "TabularTranslator",
+                                "typeConversion": true,
+                                "typeConversionSettings": {
+                                    "allowDataTruncation": true,
+                                    "treatBooleanAsNumber": false
+                                }
+                            }
+                        },
+                        "inputs": [
+                            {
+                                "referenceName": "AzureSqlTable1_copy1",
+                                "type": "DatasetReference",
+                                "parameters": {}
+                            }
+                        ],
+                        "outputs": [
+                            {
+                                "referenceName": "Parquet2",
+                                "type": "DatasetReference",
+                                "parameters": {}
+                            }
+                        ]
+                    },
+                    {
+                        "name": "Dates",
+                        "type": "Copy",
+                        "dependsOn": [],
+                        "policy": {
+                            "timeout": "0.12:00:00",
+                            "retry": 0,
+                            "retryIntervalInSeconds": 30,
+                            "secureOutput": false,
+                            "secureInput": false
+                        },
+                        "userProperties": [],
+                        "typeProperties": {
+                            "source": {
+                                "type": "AzureSqlSource",
+                                "queryTimeout": "02:00:00",
+                                "partitionOption": "None"
+                            },
+                            "sink": {
+                                "type": "ParquetSink",
+                                "storeSettings": {
+                                    "type": "AzureBlobFSWriteSettings"
+                                },
+                                "formatSettings": {
+                                    "type": "ParquetWriteSettings"
+                                }
+                            },
+                            "enableStaging": false,
+                            "translator": {
+                                "type": "TabularTranslator",
+                                "typeConversion": true,
+                                "typeConversionSettings": {
+                                    "allowDataTruncation": true,
+                                    "treatBooleanAsNumber": false
+                                }
+                            }
+                        },
+                        "inputs": [
+                            {
+                                "referenceName": "AzureSqlTable1_copy2",
+                                "type": "DatasetReference",
+                                "parameters": {}
+                            }
+                        ],
+                        "outputs": [
+                            {
+                                "referenceName": "Parquet2",
+                                "type": "DatasetReference",
+                                "parameters": {}
+                            }
+                        ]
+                    }
+                ],
+                "policy": {
+                    "elapsedTimeMetric": {}
+                },
+                "annotations": [],
+                "lastPublishTime": "2024-03-28T01:59:59Z"
+            },
+            "dependsOn": []
+        },
+        {
+            "name": "[concat(parameters('factoryName'), '/pipeline2')]",
+            "type": "Microsoft.DataFactory/factories/pipelines",
+            "apiVersion": "2018-06-01",
+            "properties": {
+                "activities": [
+                    {
+                        "name": "Copy Country",
+                        "type": "Copy",
+                        "dependsOn": [],
+                        "policy": {
+                            "timeout": "0.12:00:00",
+                            "retry": 0,
+                            "retryIntervalInSeconds": 30,
+                            "secureOutput": false,
+                            "secureInput": false
+                        },
+                        "userProperties": [],
+                        "typeProperties": {
+                            "source": {
+                                "type": "SqlServerSource",
+                                "queryTimeout": "02:00:00",
+                                "partitionOption": "None"
+                            },
+                            "sink": {
+                                "type": "ParquetSink",
+                                "storeSettings": {
+                                    "type": "AzureBlobFSWriteSettings"
+                                },
+                                "formatSettings": {
+                                    "type": "ParquetWriteSettings"
+                                }
+                            },
+                            "enableStaging": false,
+                            "translator": {
+                                "type": "TabularTranslator",
+                                "typeConversion": true,
+                                "typeConversionSettings": {
+                                    "allowDataTruncation": true,
+                                    "treatBooleanAsNumber": false
+                                }
+                            }
+                        },
+                        "inputs": [
+                            {
+                                "referenceName": "SqlServerCountry",
+                                "type": "DatasetReference",
+                                "parameters": {}
+                            }
+                        ],
+                        "outputs": [
+                            {
+                                "referenceName": "Parquet1",
+                                "type": "DatasetReference",
+                                "parameters": {}
+                            }
+                        ]
+                    },
+                    {
+                        "name": "Copy Metrics",
+                        "type": "Copy",
+                        "dependsOn": [],
+                        "policy": {
+                            "timeout": "0.12:00:00",
+                            "retry": 0,
+                            "retryIntervalInSeconds": 30,
+                            "secureOutput": false,
+                            "secureInput": false
+                        },
+                        "userProperties": [],
+                        "typeProperties": {
+                            "source": {
+                                "type": "SqlServerSource",
+                                "queryTimeout": "02:00:00",
+                                "partitionOption": "None"
+                            },
+                            "sink": {
+                                "type": "ParquetSink",
+                                "storeSettings": {
+                                    "type": "AzureBlobFSWriteSettings"
+                                },
+                                "formatSettings": {
+                                    "type": "ParquetWriteSettings"
+                                }
+                            },
+                            "enableStaging": false,
+                            "translator": {
+                                "type": "TabularTranslator",
+                                "typeConversion": true,
+                                "typeConversionSettings": {
+                                    "allowDataTruncation": true,
+                                    "treatBooleanAsNumber": false
+                                }
+                            }
+                        },
+                        "inputs": [
+                            {
+                                "referenceName": "SqlServerTable1Covid19_Metrics",
+                                "type": "DatasetReference",
+                                "parameters": {}
+                            }
+                        ],
+                        "outputs": [
+                            {
+                                "referenceName": "Parquet1",
+                                "type": "DatasetReference",
+                                "parameters": {}
+                            }
+                        ]
+                    },
+                    {
+                        "name": "Copy date",
+                        "type": "Copy",
+                        "dependsOn": [],
+                        "policy": {
+                            "timeout": "0.12:00:00",
+                            "retry": 0,
+                            "retryIntervalInSeconds": 30,
+                            "secureOutput": false,
+                            "secureInput": false
+                        },
+                        "userProperties": [],
+                        "typeProperties": {
+                            "source": {
+                                "type": "AzureSqlSource",
+                                "queryTimeout": "02:00:00",
+                                "partitionOption": "None"
+                            },
+                            "sink": {
+                                "type": "ParquetSink",
+                                "storeSettings": {
+                                    "type": "AzureBlobFSWriteSettings"
+                                },
+                                "formatSettings": {
+                                    "type": "ParquetWriteSettings"
+                                }
+                            },
+                            "enableStaging": false,
+                            "translator": {
+                                "type": "TabularTranslator",
+                                "typeConversion": true,
+                                "typeConversionSettings": {
+                                    "allowDataTruncation": true,
+                                    "treatBooleanAsNumber": false
+                                }
+                            }
+                        },
+                        "inputs": [
+                            {
+                                "referenceName": "AzureSqlTable1_copy2",
+                                "type": "DatasetReference",
+                                "parameters": {}
+                            }
+                        ],
+                        "outputs": [
+                            {
+                                "referenceName": "Parquet1",
+                                "type": "DatasetReference",
+                                "parameters": {}
+                            }
+                        ]
+                    }
+                ],
+                "policy": {
+                    "elapsedTimeMetric": {}
+                },
+                "annotations": [],
+                "lastPublishTime": "2024-03-27T20:39:22Z"
+            },
+            "dependsOn": [
+                "[concat(variables('factoryId'), '/datasets/SqlServerCountry')]",
+                "[concat(variables('factoryId'), '/datasets/SqlServerTable1Covid19_Metrics')]"
+            ]
+        },
+        {
+            "name": "[concat(parameters('factoryName'), '/SqlServerTable1')]",
+            "type": "Microsoft.DataFactory/factories/datasets",
+            "apiVersion": "2018-06-01",
+            "properties": {
+                "linkedServiceName": {
+                    "referenceName": "SqlServer2",
+                    "type": "LinkedServiceReference"
+                },
+                "annotations": [],
+                "type": "SqlServerTable",
+                "schema": [
+                    {
+                        "name": "Country",
+                        "type": "varchar"
+                    },
+                    {
+                        "name": "CountryCode",
+                        "type": "varchar"
+                    },
+                    {
+                        "name": "Latitude",
+                        "type": "decimal",
+                        "precision": 10,
+                        "scale": 5
+                    },
+                    {
+                        "name": "Longitude",
+                        "type": "decimal",
+                        "precision": 10,
+                        "scale": 5
+                    }
+                ],
+                "typeProperties": {
+                    "schema": "dbo",
+                    "table": "Country"
+                }
+            },
+            "dependsOn": [
+                "[concat(variables('factoryId'), '/linkedServices/SqlServer2')]"
+            ]
+        },
+        {
+            "name": "[concat(parameters('factoryName'), '/SqlServerTable2country')]",
+            "type": "Microsoft.DataFactory/factories/datasets",
+            "apiVersion": "2018-06-01",
+            "properties": {
+                "linkedServiceName": {
+                    "referenceName": "SqlServer2",
+                    "type": "LinkedServiceReference"
+                },
+                "annotations": [],
+                "type": "SqlServerTable",
+                "schema": [
+                    {
+                        "name": "Country",
+                        "type": "varchar"
+                    },
+                    {
+                        "name": "CountryCode",
+                        "type": "varchar"
+                    },
+                    {
+                        "name": "Latitude",
+                        "type": "decimal",
+                        "precision": 10,
+                        "scale": 5
+                    },
+                    {
+                        "name": "Longitude",
+                        "type": "decimal",
+                        "precision": 10,
+                        "scale": 5
+                    }
+                ],
+                "typeProperties": {
+                    "schema": "dbo",
+                    "table": "Country"
+                }
+            },
+            "dependsOn": [
+                "[concat(variables('factoryId'), '/linkedServices/SqlServer2')]"
+            ]
+        },
+        {
+            "name": "[concat(parameters('factoryName'), '/SqlServerTable2metric')]",
+            "type": "Microsoft.DataFactory/factories/datasets",
+            "apiVersion": "2018-06-01",
+            "properties": {
+                "linkedServiceName": {
+                    "referenceName": "SqlServer2",
+                    "type": "LinkedServiceReference"
+                },
+                "annotations": [],
+                "type": "SqlServerTable",
+                "schema": [
+                    {
+                        "name": "ID",
+                        "type": "int",
+                        "precision": 10
+                    },
+                    {
+                        "name": "Updated",
+                        "type": "date"
+                    },
+                    {
+                        "name": "Confirmed",
+                        "type": "int",
+                        "precision": 10
+                    },
+                    {
+                        "name": "Confirmed_Change",
+                        "type": "int",
+                        "precision": 10
+                    },
+                    {
+                        "name": "Deaths",
+                        "type": "int",
+                        "precision": 10
+                    },
+                    {
+                        "name": "Deaths_Change",
+                        "type": "int",
+                        "precision": 10
+                    },
+                    {
+                        "name": "Recovered",
+                        "type": "int",
+                        "precision": 10
+                    },
+                    {
+                        "name": "Recovered_Change",
+                        "type": "int",
+                        "precision": 10
+                    },
+                    {
+                        "name": "Latitude",
+                        "type": "decimal",
+                        "precision": 10,
+                        "scale": 5
+                    },
+                    {
+                        "name": "Longitude",
+                        "type": "decimal",
+                        "precision": 10,
+                        "scale": 5
+                    },
+                    {
+                        "name": "ISO2",
+                        "type": "varchar"
+                    },
+                    {
+                        "name": "ISO3",
+                        "type": "varchar"
+                    },
+                    {
+                        "name": "Country_Region",
+                        "type": "varchar"
+                    },
+                    {
+                        "name": "load_time",
+                        "type": "datetime",
+                        "precision": 23,
+                        "scale": 3
+                    }
+                ],
+                "typeProperties": {
+                    "schema": "dbo",
+                    "table": "Covid19_Metrics"
+                }
+            },
+            "dependsOn": [
+                "[concat(variables('factoryId'), '/linkedServices/SqlServer2')]"
+            ]
+        },
+        {
+            "name": "[concat(parameters('factoryName'), '/SqlServerTabledates')]",
+            "type": "Microsoft.DataFactory/factories/datasets",
+            "apiVersion": "2018-06-01",
+            "properties": {
+                "linkedServiceName": {
+                    "referenceName": "SqlServer2",
+                    "type": "LinkedServiceReference"
+                },
+                "annotations": [],
+                "type": "SqlServerTable",
+                "schema": [
+                    {
+                        "name": "DateKey",
+                        "type": "int",
+                        "precision": 10
+                    },
+                    {
+                        "name": "FullDate",
+                        "type": "date"
+                    },
+                    {
+                        "name": "isWeekDay",
+                        "type": "bit"
+                    },
+                    {
+                        "name": "DayOfWeek",
+                        "type": "int",
+                        "precision": 10
+                    },
+                    {
+                        "name": "DayOfMonth",
+                        "type": "int",
+                        "precision": 10
+                    },
+                    {
+                        "name": "DayOfQuarter",
+                        "type": "int",
+                        "precision": 10
+                    },
+                    {
+                        "name": "DayOfYear",
+                        "type": "int",
+                        "precision": 10
+                    },
+                    {
+                        "name": "DayName",
+                        "type": "varchar"
+                    },
+                    {
+                        "name": "WeekOfYear",
+                        "type": "int",
+                        "precision": 10
+                    },
+                    {
+                        "name": "WeekName",
+                        "type": "varchar"
+                    },
+                    {
+                        "name": "MonthOfYear",
+                        "type": "int",
+                        "precision": 10
+                    },
+                    {
+                        "name": "MonthName",
+                        "type": "varchar"
+                    },
+                    {
+                        "name": "CalendarQuarter",
+                        "type": "int",
+                        "precision": 10
+                    },
+                    {
+                        "name": "CalendarQuarterName",
+                        "type": "varchar"
+                    },
+                    {
+                        "name": "CalendarYear",
+                        "type": "int",
+                        "precision": 10
+                    },
+                    {
+                        "name": "FiscalMonth",
+                        "type": "int",
+                        "precision": 10
+                    },
+                    {
+                        "name": "FiscalMonthName",
+                        "type": "varchar"
+                    },
+                    {
+                        "name": "FiscalQuarter",
+                        "type": "int",
+                        "precision": 10
+                    },
+                    {
+                        "name": "FiscalQuarterName",
+                        "type": "varchar"
+                    },
+                    {
+                        "name": "FiscalYear",
+                        "type": "int",
+                        "precision": 10
+                    }
+                ],
+                "typeProperties": {
+                    "schema": "dbo",
+                    "table": "Dates"
+                }
+            },
+            "dependsOn": [
+                "[concat(variables('factoryId'), '/linkedServices/SqlServer2')]"
+            ]
+        },
+        {
+            "name": "[concat(parameters('factoryName'), '/dataflow1')]",
+            "type": "Microsoft.DataFactory/factories/dataflows",
+            "apiVersion": "2018-06-01",
+            "properties": {
+                "type": "MappingDataFlow",
+                "typeProperties": {
+                    "sources": [
+                        {
+                            "dataset": {
+                                "referenceName": "MetricsVM",
+                                "type": "DatasetReference"
+                            },
+                            "name": "source1"
+                        },
+                        {
+                            "dataset": {
+                                "referenceName": "MetricsSQL",
+                                "type": "DatasetReference"
+                            },
+                            "name": "source2"
+                        }
+                    ],
+                    "sinks": [
+                        {
+                            "dataset": {
+                                "referenceName": "Cases",
+                                "type": "DatasetReference"
+                            },
+                            "name": "sink1"
+                        },
+                        {
+                            "dataset": {
+                                "referenceName": "Recoveries",
+                                "type": "DatasetReference"
+                            },
+                            "name": "sink2"
+                        },
+                        {
+                            "dataset": {
+                                "referenceName": "Deaths",
+                                "type": "DatasetReference"
+                            },
+                            "name": "sink3"
+                        }
+                    ],
+                    "transformations": [
+                        {
+                            "name": "union1"
+                        },
+                        {
+                            "name": "Cases"
+                        },
+                        {
+                            "name": "Recoveries"
+                        },
+                        {
+                            "name": "Deaths"
+                        }
+                    ],
+                    "scriptLines": [
+                        "source(output(",
+                        "          ID as integer,",
+                        "          Updated as date,",
+                        "          Confirmed as integer,",
+                        "          Confirmed_Change as integer,",
+                        "          Deaths as integer,",
+                        "          Deaths_Change as integer,",
+                        "          Recovered as integer,",
+                        "          Recovered_Change as integer,",
+                        "          Latitude as decimal(10,5),",
+                        "          Longitude as decimal(10,5),",
+                        "          ISO2 as string,",
+                        "          ISO3 as string,",
+                        "          Country_Region as string,",
+                        "          load_time as timestamp",
+                        "     ),",
+                        "     allowSchemaDrift: true,",
+                        "     validateSchema: false,",
+                        "     ignoreNoFilesFound: false,",
+                        "     format: 'parquet',",
+                        "     partitionBy('hash', 1)) ~> source1",
+                        "source(output(",
+                        "          ID as integer,",
+                        "          Updated as date,",
+                        "          Confirmed as integer,",
+                        "          Confirmed_Change as integer,",
+                        "          Deaths as integer,",
+                        "          Deaths_Change as integer,",
+                        "          Recovered as integer,",
+                        "          Recovered_Change as integer,",
+                        "          Latitude as decimal(10,5),",
+                        "          Longitude as decimal(10,5),",
+                        "          ISO2 as string,",
+                        "          ISO3 as string,",
+                        "          Country_Region as string,",
+                        "          load_time as timestamp",
+                        "     ),",
+                        "     allowSchemaDrift: true,",
+                        "     validateSchema: false,",
+                        "     ignoreNoFilesFound: false,",
+                        "     format: 'parquet',",
+                        "     partitionBy('hash', 1)) ~> source2",
+                        "source1, source2 union(byName: true)~> union1",
+                        "union1 select(mapColumn(",
+                        "          ID,",
+                        "          Updated,",
+                        "          Confirmed,",
+                        "          Confirmed_Change,",
+                        "          Latitude,",
+                        "          Longitude,",
+                        "          ISO3,",
+                        "          ISO2,",
+                        "          Country_Region,",
+                        "          load_time",
+                        "     ),",
+                        "     skipDuplicateMapInputs: true,",
+                        "     skipDuplicateMapOutputs: true) ~> Cases",
+                        "union1 select(mapColumn(",
+                        "          ID,",
+                        "          Updated,",
+                        "          Recovered,",
+                        "          Recovered_Change,",
+                        "          Latitude,",
+                        "          Longitude,",
+                        "          ISO2,",
+                        "          ISO3,",
+                        "          Country_Region,",
+                        "          load_time",
+                        "     ),",
+                        "     skipDuplicateMapInputs: true,",
+                        "     skipDuplicateMapOutputs: true) ~> Recoveries",
+                        "union1 select(mapColumn(",
+                        "          ID,",
+                        "          Updated,",
+                        "          Deaths,",
+                        "          Deaths_Change,",
+                        "          Latitude,",
+                        "          Longitude,",
+                        "          ISO2,",
+                        "          ISO3,",
+                        "          Country_Region,",
+                        "          load_time",
+                        "     ),",
+                        "     skipDuplicateMapInputs: true,",
+                        "     skipDuplicateMapOutputs: true) ~> Deaths",
+                        "Cases sink(allowSchemaDrift: true,",
+                        "     validateSchema: false,",
+                        "     format: 'parquet',",
+                        "     partitionFileNames:['dbo.Cases.parquet'],",
+                        "     truncate: true,",
+                        "     umask: 0022,",
+                        "     preCommands: [],",
+                        "     postCommands: [],",
+                        "     skipDuplicateMapInputs: true,",
+                        "     skipDuplicateMapOutputs: true,",
+                        "     partitionBy('hash', 1)) ~> sink1",
+                        "Recoveries sink(allowSchemaDrift: true,",
+                        "     validateSchema: false,",
+                        "     format: 'parquet',",
+                        "     partitionFileNames:['dbo.Recoveries.parquet'],",
+                        "     truncate: true,",
+                        "     umask: 0022,",
+                        "     preCommands: [],",
+                        "     postCommands: [],",
+                        "     skipDuplicateMapInputs: true,",
+                        "     skipDuplicateMapOutputs: true,",
+                        "     partitionBy('hash', 1)) ~> sink2",
+                        "Deaths sink(allowSchemaDrift: true,",
+                        "     validateSchema: false,",
+                        "     format: 'parquet',",
+                        "     partitionFileNames:['dbo.Deaths.parquet'],",
+                        "     truncate: true,",
+                        "     umask: 0022,",
+                        "     preCommands: [],",
+                        "     postCommands: [],",
+                        "     skipDuplicateMapInputs: true,",
+                        "     skipDuplicateMapOutputs: true,",
+                        "     partitionBy('hash', 1)) ~> sink3"
+                    ]
+                }
+            },
+            "dependsOn": [
+                "[concat(variables('factoryId'), '/datasets/Recoveries')]"
+            ]
+        },
+        {
+            "name": "[concat(parameters('factoryName'), '/dataflow2')]",
+            "type": "Microsoft.DataFactory/factories/dataflows",
+            "apiVersion": "2018-06-01",
+            "properties": {
+                "type": "MappingDataFlow",
+                "typeProperties": {
+                    "sources": [
+                        {
+                            "dataset": {
+                                "referenceName": "CountryParquetVMSQL",
+                                "type": "DatasetReference"
+                            },
+                            "name": "VMcountry"
+                        },
+                        {
+                            "dataset": {
+                                "referenceName": "CountryParquetVMSQL",
+                                "type": "DatasetReference"
+                            },
+                            "name": "VMdates"
+                        }
+                    ],
+                    "sinks": [
+                        {
+                            "dataset": {
+                                "referenceName": "Geography",
+                                "type": "DatasetReference"
+                            },
+                            "name": "sink1"
+                        },
+                        {
+                            "dataset": {
+                                "referenceName": "Dates",
+                                "type": "DatasetReference"
+                            },
+                            "name": "sink2"
+                        }
+                    ],
+                    "transformations": [],
+                    "scriptLines": [
+                        "source(output(",
+                        "          Country as string,",
+                        "          CountryCode as string,",
+                        "          Latitude as decimal(10,5),",
+                        "          Longitude as decimal(10,5)",
+                        "     ),",
+                        "     allowSchemaDrift: true,",
+                        "     validateSchema: false,",
+                        "     ignoreNoFilesFound: false,",
+                        "     format: 'parquet') ~> VMcountry",
+                        "source(output(",
+                        "          Country as string,",
+                        "          CountryCode as string,",
+                        "          Latitude as decimal(10,5),",
+                        "          Longitude as decimal(10,5)",
+                        "     ),",
+                        "     allowSchemaDrift: true,",
+                        "     validateSchema: false,",
+                        "     ignoreNoFilesFound: false,",
+                        "     format: 'parquet') ~> VMdates",
+                        "VMcountry sink(allowSchemaDrift: true,",
+                        "     validateSchema: false,",
+                        "     format: 'parquet',",
+                        "     umask: 0022,",
+                        "     preCommands: [],",
+                        "     postCommands: [],",
+                        "     skipDuplicateMapInputs: true,",
+                        "     skipDuplicateMapOutputs: true) ~> sink1",
+                        "VMdates sink(allowSchemaDrift: true,",
+                        "     validateSchema: false,",
+                        "     format: 'parquet',",
+                        "     umask: 0022,",
+                        "     preCommands: [],",
+                        "     postCommands: [],",
+                        "     skipDuplicateMapInputs: true,",
+                        "     skipDuplicateMapOutputs: true) ~> sink2"
+                    ]
+                }
+            },
+            "dependsOn": []
+        }
+    ]
+}
