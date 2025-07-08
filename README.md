@@ -43,8 +43,12 @@ Our data architecture is built on modern cloud tools:
 
 ## Setup Steps
 - **Deploy Azure Resources:**
-  - bash# Use the ARM template in arm_template/ folder    
-  - az deployment group create --resource-group your-rg --template-file template.json     
+  - Use the ARM template in the `arm_template/` folder.
+  - Run the following command:
+
+    ```bash
+    az deployment group create --resource-group your-rg --template-file template.json
+    ```  
 
 - **Configure Data Factory:**
 
