@@ -2,7 +2,9 @@
 
 A comprehensive data science project analyzing COVID-19 policies to identify the optimal balance between public health effectiveness and minimal economic restrictions.
 
-## Project Overview
+**Team Members:**  Nathan Chang, Penny Lin, Sachiel Chuckrow, Tai Ahmad
+
+## Project Overview 
 
 This project supports government leaders in making data-driven decisions for COVID-19 policy management. Using real-world international data, we developed a model to maintain:
 
